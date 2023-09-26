@@ -10,14 +10,14 @@ while true; do
     if [ $? -eq 0 ]; then
         echo "Successfully ran 'make ho'."
         
-        bash user_data/strategies/create_new_strategy_version.sh
+        python3 user_data/strategies/create_new_strategy_version.py
         # Run git add and git commit
         echo "Running 'git add'..."
         git add user_data/strategies/.
         git add -u
         echo "Running 'git commit'..."
         git commit -m "Auto commit"
-#        git push origin
+        git push origin
         
         # Sleep for a few seconds before running 'make ho' again
         sleep 10
