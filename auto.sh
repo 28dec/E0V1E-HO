@@ -3,17 +3,18 @@
 # Infinite loop
 while true; do
     echo "Running 'make ho'..."
-    make ho
-    make up
+#    make ho
+#    make up
     
     # Check the exit status of the 'make ho' command
     if [ $? -eq 0 ]; then
         echo "Successfully ran 'make ho'."
         
-        bash user_data/strategy/create_new_strategy_version.sh
+        bash user_data/strategies/create_new_strategy_version.sh
         # Run git add and git commit
         echo "Running 'git add'..."
-        git add user_data/strategy/.
+        git add user_data/strategies/.
+        git add -u
         echo "Running 'git commit'..."
         git commit -m "Auto commit"
 #        git push origin
