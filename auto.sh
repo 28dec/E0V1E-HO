@@ -10,7 +10,7 @@ while true; do
     if [ $? -eq 0 ]; then
         echo "Successfully ran 'make ho'."
         
-        python3 user_data/strategies/create_new_strategy_version.py
+        bash user_data/strategies/create_new_strategy_version.sh
         # Run git add and git commit
         echo "Running 'git add'..."
         git add user_data/strategies/.
