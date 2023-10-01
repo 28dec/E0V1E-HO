@@ -3,8 +3,8 @@
 # Infinite loop
 while true; do
     echo "Running 'make ho'..."
-#    make ho
-#    make up
+    make ho
+    make up
     
     # Check the exit status of the 'make ho' command
     if [ $? -eq 0 ]; then
