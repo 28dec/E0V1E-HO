@@ -1,5 +1,5 @@
 {
-  "strategy_name": "E0V1E_20231004_085308",
+  "strategy_name": "E0V1E",
   "params": {
     "stoploss": {
       "stoploss": -0.13
@@ -14,20 +14,20 @@
       "max_open_trades": 3
     },
     "buy": {
-      "buy_cti_32": -0.49,
-      "buy_rsi_32": 41,
-      "buy_rsi_fast_32": 24,
-      "buy_sma15_32": 0.981
+      "buy_cti_32": -0.62,
+      "buy_rsi_32": 42,
+      "buy_rsi_fast_32": 27,
+      "buy_sma15_32": 0.945
     },
     "sell": {},
     "protection": {},
     "roi": {
-      "0": 0.245,
-      "19": 0.087,
-      "36": 0.04,
-      "120": 0
+      "0": 0.131,
+      "17": 0.078,
+      "71": 0.032,
+      "106": 0
     }
   },
   "ft_stratparam_v": 1,
-  "export_time": "2023-10-04 08:28:20.994855+00:00"
+  "export_time": "2023-10-13 17:17:14.027299+00:00"
 }

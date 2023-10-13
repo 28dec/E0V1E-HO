@@ -16,6 +16,8 @@ services:
       - "./user_data/config.json:/freqtrade/user_data/config.json"
       - "./user_data/exchange.json:/freqtrade/user_data/exchange.json"
       - "./user_data/strategies:/freqtrade/user_data/strategies"
+      - "./user_data/hyperopts:/freqtrade/user_data/hyperopts"
+      - "./user_data/hyperopt_results:/freqtrade/user_data/hyperopt_results"
       - "/ft_data:/freqtrade/user_data/data"
     # Expose api on port 8080 (localhost only)
     # Please read the https://www.freqtrade.io/en/stable/rest-api/ documentation

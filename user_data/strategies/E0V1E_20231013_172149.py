@@ -8,7 +8,7 @@ from freqtrade.strategy import DecimalParameter, IntParameter
 from functools import reduce
 
 
-class E0V1E(IStrategy):
+class E0V1E_20231013_172149(IStrategy):
     minimal_roi = {
         "0": 0.02,
         "120": 0.01
