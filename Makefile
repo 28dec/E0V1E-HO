@@ -1,5 +1,5 @@
 up:
-	docker compose run --rm freqtrade backtesting --strategy E0V1E --timeframe 5m --timeframe-detail 1m -c user_data/config.json -c user_data/exchange.json --timerange 20200101-20210220 > README.txt && cat README.txt
+	docker compose run --rm freqtrade backtesting --strategy E0V1E_20231014_0847 --timeframe 5m --timeframe-detail 1m -c user_data/config.json -c user_data/exchange.json --timerange 20200101-20210220 > README.txt && cat README.txt
 
 ho:
 	docker compose run --rm freqtrade hyperopt --random-state 100 --hyperopt-loss SortinoHyperOptLossDaily --strategy E0V1E --timeframe 5m --timeframe-detail 1m -c user_data/config.json -c user_data/exchange.json --space buy roi --timerange 20200101-20210220 -e 1000 -j 1
