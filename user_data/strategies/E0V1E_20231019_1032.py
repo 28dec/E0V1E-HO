@@ -10,7 +10,7 @@ from functools import reduce
 TMP_HOLD = []
 
 
-class E0V1E(IStrategy):
+class E0V1E_20231019_1032(IStrategy):
     minimal_roi = {
         "0": 10
     }

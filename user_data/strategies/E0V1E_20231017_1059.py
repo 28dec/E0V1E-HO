@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 import talib.abstract as ta
 import pandas_ta as pta
 from freqtrade.persistence import Trade
@@ -7,18 +7,18 @@ from pandas import DataFrame
 from freqtrade.strategy import DecimalParameter, IntParameter
 from functools import reduce
 
-TMP_HOLD = []
 
-
-class E0V1E(IStrategy):
+class E0V1E_20231017_1059(IStrategy):
     minimal_roi = {
-        "0": 10
+        "0": 0.02,
+        "120": 0.01
     }
 
     timeframe = '5m'
 
     process_only_new_candles = True
     startup_candle_count = 120
+    position_adjustment_enable = False
 
     order_types = {
         'entry': 'market',
@@ -27,21 +27,44 @@ class E0V1E(IStrategy):
         'force_entry': 'market',
         'force_exit': "market",
         'stoploss': 'market',
-        'stoploss_on_exchange': True,
+        'stoploss_on_exchange': False,
 
         'stoploss_on_exchange_interval': 60,
         'stoploss_on_exchange_market_ratio': 0.99
     }
 
-    stoploss = -0.18
+    stoploss = -0.13
 
     is_optimize_32 = True
-    buy_rsi_fast_32 = IntParameter(20, 70, default=45, space='buy', optimize=is_optimize_32)
-    buy_rsi_32 = IntParameter(15, 50, default=35, space='buy', optimize=is_optimize_32)
-    buy_sma15_32 = DecimalParameter(0.900, 1, default=0.961, decimals=3, space='buy', optimize=is_optimize_32)
-    buy_cti_32 = DecimalParameter(-1, 0, default=-0.58, decimals=2, space='buy', optimize=is_optimize_32)
+    buy_rsi_fast_32 = IntParameter(20, 70, default=46, space='buy', optimize=is_optimize_32)
+    buy_rsi_32 = IntParameter(15, 50, default=19, space='buy', optimize=is_optimize_32)
+    buy_sma15_32 = DecimalParameter(0.900, 1, default=0.942, decimals=3, space='buy', optimize=is_optimize_32)
+    buy_cti_32 = DecimalParameter(-1, 0, default=-0.86, decimals=2, space='buy', optimize=is_optimize_32)
 
-    sell_fastx = IntParameter(50, 100, default=75, space='sell', optimize=True)
+    def custom_stake_amount(self, pair: str, current_time: datetime, current_rate: float,
+                            proposed_stake: float, min_stake: float, max_stake: float,
+                            leverage: float, entry_tag: str, side: str,
+                            **kwargs) -> float:
+        return proposed_stake * 0.7
+
+    def adjust_trade_position(self, trade: Trade, current_time: datetime,
+                              current_rate: float, current_profit: float,
+                              min_stake: float, max_stake: float,
+                              current_entry_rate: float, current_exit_rate: float,
+                              current_entry_profit: float, current_exit_profit: float,
+                              **kwargs) -> float:
+        #Take half of profit
+        count_of_exits = trade.nr_of_successful_exits
+        if current_profit >= 0.02 and count_of_exits == 0:
+            return -0.5 * trade.stake_amount
+        #DCA
+        count_of_entries = trade.nr_of_successful_entries
+        filled_entries = trade.select_filled_orders(trade.entry_side)
+        initial_stake = filled_entries[0].cost
+
+        if current_profit < -0.05 and count_of_entries == 1 :
+            return initial_stake / 0.7 * 0.3
+        return None
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
@@ -80,43 +103,6 @@ class E0V1E(IStrategy):
                 'enter_long'] = 1
 
         return dataframe
-
-    def custom_exit(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float,
-                    current_profit: float, **kwargs):
-
-        dataframe, _ = self.dp.get_analyzed_dataframe(pair=pair, timeframe=self.timeframe)
-
-        current_candle = dataframe.iloc[-1].squeeze()
-
-        if current_time - timedelta(minutes=90) < trade.open_date_utc:
-            if current_profit >= 0.08:
-                return "fastk_profit_sell_fast"
-
-        if current_time - timedelta(hours=3) > trade.open_date_utc:
-            if (current_candle["fastk"] >= 70) and (current_profit >= 0):
-                return "fastk_profit_sell_delay"
-
-        if current_time - timedelta(hours=4) > trade.open_date_utc:
-            if current_profit > -0.06:
-                return "fastk_loss_sell_delay"
-
-        if current_profit > 0:
-            if current_candle["fastk"] > self.sell_fastx.value:
-                return "fastk_profit_sell"
-
-        if current_profit <= -0.1:
-            # tmp hold
-            if trade.id not in TMP_HOLD:
-                TMP_HOLD.append(trade.id)
-
-        for i in TMP_HOLD:
-            # start recover sell it
-            if trade.id == i and current_profit > -0.1:
-                if current_candle["fastk"] > self.sell_fastx.value:
-                    TMP_HOLD.remove(i)
-                    return "fastk_loss_sell"
-
-        return None
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
