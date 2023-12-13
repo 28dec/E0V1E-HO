@@ -1,0 +1,35 @@
+{
+  "strategy_name": "E0V1E_20231213_0538",
+  "params": {
+    "stoploss": {
+      "stoploss": -0.18
+    },
+    "trailing": {
+      "trailing_stop": false,
+      "trailing_stop_positive": null,
+      "trailing_stop_positive_offset": 0.0,
+      "trailing_only_offset_is_reached": false
+    },
+    "max_open_trades": {
+      "max_open_trades": 3
+    },
+    "buy": {
+      "buy_cti_32": -0.66,
+      "buy_rsi_32": 36,
+      "buy_rsi_fast_32": 21,
+      "buy_sma15_32": 0.927
+    },
+    "sell": {
+      "sell_fastx": 75
+    },
+    "protection": {},
+    "roi": {
+      "0": 0.129,
+      "19": 0.071,
+      "53": 0.01,
+      "92": 0
+    }
+  },
+  "ft_stratparam_v": 1,
+  "export_time": "2023-12-13 05:33:35.772296+00:00"
+}
