@@ -1,0 +1,35 @@
+{
+  "strategy_name": "E0V1E_20231222_0709",
+  "params": {
+    "stoploss": {
+      "stoploss": -0.18
+    },
+    "trailing": {
+      "trailing_stop": false,
+      "trailing_stop_positive": null,
+      "trailing_stop_positive_offset": 0.0,
+      "trailing_only_offset_is_reached": false
+    },
+    "max_open_trades": {
+      "max_open_trades": 3
+    },
+    "buy": {
+      "buy_cti_32": -0.01,
+      "buy_rsi_32": 37,
+      "buy_rsi_fast_32": 23,
+      "buy_sma15_32": 0.914
+    },
+    "sell": {
+      "sell_fastx": 75
+    },
+    "protection": {},
+    "roi": {
+      "0": 0.193,
+      "38": 0.03,
+      "48": 0.01,
+      "99": 0
+    }
+  },
+  "ft_stratparam_v": 1,
+  "export_time": "2023-12-22 07:04:48.406718+00:00"
+}
