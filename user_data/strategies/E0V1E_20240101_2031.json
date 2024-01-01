@@ -1,0 +1,35 @@
+{
+  "strategy_name": "E0V1E_20240101_2031",
+  "params": {
+    "stoploss": {
+      "stoploss": -0.18
+    },
+    "trailing": {
+      "trailing_stop": false,
+      "trailing_stop_positive": null,
+      "trailing_stop_positive_offset": 0.0,
+      "trailing_only_offset_is_reached": false
+    },
+    "max_open_trades": {
+      "max_open_trades": Infinity
+    },
+    "buy": {
+      "buy_cti_32": -0.45,
+      "buy_rsi_32": 16,
+      "buy_rsi_fast_32": 60,
+      "buy_sma15_32": 0.936
+    },
+    "sell": {
+      "sell_fastx": 75
+    },
+    "protection": {},
+    "roi": {
+      "0": 0.073,
+      "40": 0.062,
+      "93": 0.012,
+      "138": 0
+    }
+  },
+  "ft_stratparam_v": 1,
+  "export_time": "2024-01-01 20:22:44.929757+00:00"
+}
