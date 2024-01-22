@@ -11,25 +11,25 @@
       "trailing_only_offset_is_reached": false
     },
     "max_open_trades": {
-      "max_open_trades": 40
+      "max_open_trades": 10
     },
     "buy": {
-      "buy_cti_32": -0.11,
-      "buy_rsi_32": 40,
+      "buy_cti_32": -0.73,
+      "buy_rsi_32": 36,
       "buy_rsi_fast_32": 21,
-      "buy_sma15_32": 0.913
+      "buy_sma15_32": 0.927
     },
     "sell": {
       "sell_fastx": 75
     },
     "protection": {},
     "roi": {
-      "0": 0.099,
-      "36": 0.079,
-      "84": 0.011,
-      "98": 0
+      "0": 0.08499999999999999,
+      "16": 0.048,
+      "65": 0.018,
+      "91": 0
     }
   },
   "ft_stratparam_v": 1,
-  "export_time": "2024-01-11 16:19:38.068699+00:00"
+  "export_time": "2024-01-22 01:46:28.909301+00:00"
 }
